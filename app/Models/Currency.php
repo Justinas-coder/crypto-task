@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Currency extends Model
 {
     use HasFactory;
+
+    public $incrementing = false;
+    protected $primaryKey = 'name';
+
+    public function assets()
+    {
+        return $this->hasMany(Asset::class);
+    }
 }

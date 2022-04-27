@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('title');
+            $table->string('crypto_currency')->nullable();
+            $table->string('quantity');
+            $table->string('paid_value');
+            $table->string('currency')->default('USD');
+
             $table->timestamps();
         });
     }
