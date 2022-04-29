@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
+use App\Models\Currency;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AssetController extends Controller
 {
@@ -20,22 +22,36 @@ class AssetController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        $currencies = Currency::all();
+
+        $asset = auth()->user()->assets()->get()->all();
+
+        return view('admin.create', ['asset' => $asset, 'currencies' => $currencies]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->validate([
+            'title' => 'required|min:8|max:255',
+            'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
+            'quantity' => 'required|numeric|min:0',
+            'paid_value' => 'required|numeric|min:0',
+            'currency' => 'required',
+        ]);
+
+        auth()->user()->assets()->create($inputs);
+        session()->flash('asset-created-message', 'Asset was Created');
+        return redirect()->route('asset.index');
     }
 
     /**
