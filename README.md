@@ -26,7 +26,7 @@ How to launch it:
 - Generate .env file using CML command >> php artisan key:generate.
 - Database name variable should be like >> DB_DATABASE=crypto_task <<.
 - This application use external API data, so you need to register to https://coinlayer.com/ and get your access KEY.
-- In .env file create additional variable >> COIN_LAYER_API_KEY=****your key from coinlayer.com******.
+- In .env file create additional variable >> COIN_LAYER_API_KEY=>>>your key from coinlayer.com<<<<.
 - Make migrations using CML command >> sail artisan migrate <<.
 - Seed database using CML command >> sail artisan db:seed <<.
 - Go to http://localhost/login  and enjoy it :)
