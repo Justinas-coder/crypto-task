@@ -1,4 +1,4 @@
-1 -  in which you can manage your assets and see values.
+1 -  Application can manage your your crypto assets and see values.
 
 - You can create two entities in this API: User and Asset:
 - User can CRUD his Assets.
@@ -30,3 +30,5 @@ How to launch it:
 - Make migrations using CML command >> sail artisan migrate <<.
 - Seed database using CML command >> sail artisan db:seed <<.
 - Go to http://localhost/login  and enjoy it :)
+
+

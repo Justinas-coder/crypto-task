@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Tests\TestCase;
 
 class AssetTest extends TestCase
@@ -14,12 +16,14 @@ class AssetTest extends TestCase
      * @return void
      */
 
-    private $asset = [];
+    public $asset = [];
+
 
     public function __construct()
     {
+        parent::__construct();
         $this->asset = [
-            'title' => 'Binance',
+            'title' => 'Binanceeee',
             'crypto_currency' => 'BTC',
             'quantity' => '2',
             'paid_value' => '20',
@@ -27,14 +31,19 @@ class AssetTest extends TestCase
         ];
     }
 
-    public function asset_store_response_test()
-    {
-        $response = $this->post('/asset/store', $this->asset);
 
-        $response = assertRedirect('/home');
+    public function test_asset_store_response()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->withSession(['banned' => false])->post('/asset/store', $this->asset);
+
+        $response->assertRedirect('/assets');
+
+
     }
 
-    public function asset_store_db_test()
+    public function test_asset_store_db()
     {
         $this->assertDatabaseHas('assets', $this->asset);
     }
