@@ -31,7 +31,6 @@ class AssetController extends Controller
 
         $currencies_stock = ($response->json());
 
-
         $asset_quantities = [];
 
         foreach ($currencies as $currency) {

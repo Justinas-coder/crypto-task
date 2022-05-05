@@ -31,4 +31,4 @@ How to launch it:
 - Seed database using CML command >> sail artisan db:seed <<.
 - Go to http://localhost/login  and enjoy it :)
 
-
+Run PHP Unitest for Asset store and DB check with CML command >> "sail artisan test".
