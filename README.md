@@ -1,6 +1,6 @@
 1 -  Application can manage your your crypto assets and see values.
 
-- You can create two entities in this API: User and Asset:
+- You can create two entities in this Web Application: User and Asset:
 - User can CRUD his Assets.
 
 Asset:
@@ -32,3 +32,34 @@ How to launch it:
 - Go to http://localhost/login  and enjoy it :)
 
 Run PHP Unitest for Asset store and DB check with CML command >> "sail artisan test".
+
+
+As HTTP API application returns JSON format.
+
+URL: http://localhost/api/assets  returns all created asset with values as e.g. :
+
+"id": 5,
+"title": "Testing blach",
+"currency": "MIOTA",
+"quantity": "3",
+"payed_value": "3232",
+"current_value": 1.48593,
+"created_at": "2022-05-06 07:07:41"
+
+URL: http://localhost/api/assets/total returns total values of each currency, 
+value is calculated with data from external API. e.g :
+
+[
+{
+"currency": "BTC",
+"current_value": 2089086.5048939998
+},
+{
+"currency": "ETH",
+"current_value": 8069.964915
+},
+{
+"currency": "MIOTA",
+"current_value": 1.46922
+}
+]
