@@ -22,7 +22,7 @@ class AssetResource extends JsonResource
             'currency' => $this->crypto_currency,
             'quantity' => $this->quantity,
             'payed_value' => $this->paid_value,
-            'crypto_currency' => carbon::parse($this->created_at),
+            'created_at' =>$this->created_at->toDateTimeString(),
         ];
     }
 }
