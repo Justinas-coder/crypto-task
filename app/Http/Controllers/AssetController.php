@@ -18,6 +18,7 @@ class AssetController extends Controller
      */
     public function index(Request $request)
     {
+
         $currencies = Currency::all();
 
         /**

@@ -23,7 +23,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <h3>Home Page</h3>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
