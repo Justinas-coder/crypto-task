@@ -23,6 +23,7 @@ Stack:
 How to launch it:
 - Deppending on your OS (win, Ubuntu, Mac) make your system ready to use (https://www.docker.com).
 - Clone repository to the Docker container and run it.
+- Install PHP dependencies: composer install.
 - Generate .env file using CML command >> php artisan key:generate.
 - Database name variable should be like >> DB_DATABASE=crypto_task <<.
 - This application use external API data, so you need to register to https://coinlayer.com/ and get your access KEY.
