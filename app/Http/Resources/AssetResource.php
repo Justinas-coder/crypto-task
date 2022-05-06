@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Asset;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class AssetResource extends JsonResource
 {
@@ -16,12 +17,25 @@ class AssetResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        /**
+         * #2-1 using Laravel HTTP Client
+         */
+        $response = Http::get('http://api.coinlayer.com/live', [
+            "access_key" => config('services.coin_layer.api_key'),
+            "symbols" => "BTC,ETH,MIOTA"
+        ]);
+
+
+        $currencies_stock = ($response->json());
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'currency' => $this->crypto_currency,
             'quantity' => $this->quantity,
             'payed_value' => $this->paid_value,
+            'current_value' => $this->quantity * $currencies_stock['rates'][$this->crypto_currency],
             'created_at' =>$this->created_at->toDateTimeString(),
         ];
     }
