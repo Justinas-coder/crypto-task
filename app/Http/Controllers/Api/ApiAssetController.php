@@ -10,6 +10,9 @@ use App\Models\Asset;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class ApiAssetController extends Controller
@@ -47,4 +50,24 @@ class ApiAssetController extends Controller
 
         return $asset_quantities;
     }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|numeric|min:0',
+            'title' => 'required|min:8|max:255',
+            'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
+            'quantity' => 'required|numeric|min:0',
+            'paid_value' => 'required|numeric|min:0',
+            'currency' => 'required',
+        ]);
+
+       if($validator->fails()){
+           return $validator->messages();
+       }
+
+        $asset = Asset::create($request->all());
+        return response()->json($asset, 201);
+    }
+
 }

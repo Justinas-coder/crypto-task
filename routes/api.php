@@ -19,5 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/assets', [ApiAssetController::class, 'index']);
 Route::get('/assets/total', [ApiAssetController::class, 'showTotalSum']);
+Route::post('/assets', [ApiAssetController::class, 'store']);
+
 
 
