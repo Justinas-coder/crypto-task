@@ -54,7 +54,7 @@ class ApiAssetController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric|min:0',
+            'user_id' => 'required|numeric',
             'title' => 'required|min:8|max:255',
             'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
             'quantity' => 'required|numeric|min:0',
@@ -66,8 +66,33 @@ class ApiAssetController extends Controller
            return $validator->messages();
        }
 
-        $asset = Asset::create($request->all());
-        return response()->json($asset, 201);
+        $asset = Asset::create([
+            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'crypto_currency' => $request->crypto_currency,
+            'quantity' => $request->quantity,
+            'paid_value' => $request->paid_value,
+            'currency' => $request->currency
+        ]);
+        return response()->json(['asset' => $asset], 201);
     }
+
+    public function delete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|numeric',
+        ]);
+
+        if($validator->fails()){
+            return $validator->messages();
+        }
+
+        $asset = Asset::findOrFail($request->asset_id);
+
+        $asset->destroy();
+
+        return response()->json('deleted', 204);
+    }
+
 
 }
