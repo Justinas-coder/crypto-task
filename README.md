@@ -64,3 +64,16 @@ value is calculated with data from external API. e.g :
 "current_value": 1.46922
 }
 ]
+
+For asset store  use HTTP POST method with URL :
+
+http://localhost/api/assets
+
+API receives request with data as bellow e.g.
+
+'user_id' => 'required|numeric',
+'title' => 'required|min:8|max:255',
+'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
+'quantity' => 'required|numeric|min:0',
+'paid_value' => 'required|numeric|min:0',
+'currency' => 'required',
