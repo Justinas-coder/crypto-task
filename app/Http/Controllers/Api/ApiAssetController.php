@@ -79,6 +79,7 @@ class ApiAssetController extends Controller
 
     public function delete(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'id' => 'required|numeric',
         ]);
@@ -87,9 +88,10 @@ class ApiAssetController extends Controller
             return $validator->messages();
         }
 
-        $asset = Asset::findOrFail($request->asset_id);
+        $asset = Asset::findOrFail($request->id);
 
-        $asset->destroy();
+
+        $asset->delete();
 
         return response()->json('deleted', 204);
     }

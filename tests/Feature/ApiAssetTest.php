@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Asset;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -27,7 +28,9 @@ class ApiAssetTest extends TestCase
     {
         $response = $this->post('/api/assets', $this->asset);
 
+
         $this->asset = $response['asset'];
+
 
 
         $response->assertStatus( 201);
@@ -37,8 +40,10 @@ class ApiAssetTest extends TestCase
 
     public function test_api_asset_delete_response()
     {
+        $asset = Asset::first();
 
-        $response = $this->delete('/api/assets', $this->asset);
+        $response = $this->delete('/api/assets', ['id' => $asset->id]);
+
 
         $response->assertStatus(204);
     }
