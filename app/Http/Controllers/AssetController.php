@@ -11,14 +11,8 @@ use Illuminate\Validation\Rule;
 
 class AssetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-
         $currencies = Currency::all();
 
         /**
@@ -28,7 +22,6 @@ class AssetController extends Controller
             "access_key" => config('services.coin_layer.api_key'),
             "symbols" => "BTC,ETH,MIOTA"
         ]);
-
 
         $currencies_stock = ($response->json());
 
@@ -58,11 +51,6 @@ class AssetController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
     public function create()
     {
         $currencies = Currency::all();
@@ -72,12 +60,6 @@ class AssetController extends Controller
         return view('admin.create', ['asset' => $asset, 'currencies' => $currencies]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         $inputs = $request->validate([
@@ -93,23 +75,6 @@ class AssetController extends Controller
         return redirect()->route('asset.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Asset  $asset
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Asset $asset)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Asset  $asset
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
     public function edit(Asset $asset)
     {
         $currencies = Currency::all();
@@ -138,12 +103,6 @@ class AssetController extends Controller
         return redirect()->route('asset.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Asset  $asset
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     */
     public function destroy(Asset $asset)
     {
         $asset->delete();

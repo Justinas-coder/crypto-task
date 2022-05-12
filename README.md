@@ -17,6 +17,7 @@ Stack:
 - Docker
 - Laravel 9x
 - Bootstrap
+- Postman
 
 
 
@@ -31,8 +32,6 @@ How to launch it:
 - Make migrations using CML command >> sail artisan migrate <<.
 - Seed database using CML command >> sail artisan db:seed <<.
 - Go to http://localhost/login  and enjoy it :)
-
-Run PHP Unitest for Asset store and DB check with CML command >> "sail artisan test".
 
 
 As HTTP API application returns JSON format.
@@ -65,7 +64,7 @@ value is calculated with data from external API. e.g :
 }
 ]
 
-For asset store  use HTTP POST method with URL :
+For asset "store"  use HTTP POST method with URL :
 
 http://localhost/api/assets
 
@@ -77,3 +76,18 @@ API receives request with data as bellow e.g.
 'quantity' => 'required|numeric|min:0',
 'paid_value' => 'required|numeric|min:0',
 'currency' => 'required',
+
+For asset "delete"  use HTTP DELETE method with URL :
+
+http://localhost/api/assets
+
+Request should have asset "id" .
+
+For asset "update"  use HTTP PUT method with URL :
+
+http://localhost/api/assets/{id} 
+
+End point of this URL is Asset id number.
+
+
+Run PHP Unitest for Asset store and DB check for Web and Api applications with CML command >> "sail artisan test".

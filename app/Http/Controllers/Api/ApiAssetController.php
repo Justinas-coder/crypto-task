@@ -19,7 +19,6 @@ class ApiAssetController extends Controller
 {
     public function index(Request $request)
     {
-
         return AssetResource::collection(Asset::all());
     }
 
@@ -34,7 +33,6 @@ class ApiAssetController extends Controller
             "access_key" => config('services.coin_layer.api_key'),
             "symbols" => "BTC,ETH,MIOTA"
         ]);
-
 
         $currencies_stock = ($response->json());
 
@@ -79,10 +77,7 @@ class ApiAssetController extends Controller
 
     public function update(Request $request, $id)
     {
-//        return $request->body;
-
         $asset = Asset::findOrFail($id);
-
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
@@ -102,12 +97,8 @@ class ApiAssetController extends Controller
         return response()->json(['asset' => $asset], 201);
     }
 
-
-
-
     public function delete(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'id' => 'required|numeric',
         ]);
@@ -117,7 +108,6 @@ class ApiAssetController extends Controller
         }
 
         $asset = Asset::findOrFail($request->id);
-
 
         $asset->delete();
 
