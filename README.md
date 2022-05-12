@@ -47,7 +47,7 @@ URL: http://localhost/api/assets  returns all created asset with values as e.g. 
 "created_at": "2022-05-06 07:07:41"
 
 URL: http://localhost/api/assets/total returns total values of each currency, 
-value is calculated with data from external API. e.g :
+value is calculated with live data from external API. e.g :
 
 [
 {
