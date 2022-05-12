@@ -21,6 +21,8 @@ Route::get('/assets', [ApiAssetController::class, 'index']);
 Route::get('/assets/total', [ApiAssetController::class, 'showTotalSum']);
 Route::post('/assets', [ApiAssetController::class, 'store']);
 Route::delete('/assets', [ApiAssetController::class, 'delete']);
+Route::put('/assets/{id}', [ApiAssetController::class, 'update']);
+
 
 
 

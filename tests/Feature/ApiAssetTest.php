@@ -28,13 +28,35 @@ class ApiAssetTest extends TestCase
     {
         $response = $this->post('/api/assets', $this->asset);
 
-
         $this->asset = $response['asset'];
-
-
 
         $response->assertStatus( 201);
     }
+
+    public function test_api_asset_update_response()
+    {
+        $asset = Asset::first();
+
+        $response = $this->put('/api/assets/' . $asset->id, [
+
+            'user_id' => 2,
+            'title' => 'TestTestTestUpdate',
+            'crypto_currency' => 'BTC',
+            'quantity' => 3,
+            'paid_value' => 4222,
+            'currency' => 'USD'
+
+        ]);
+
+        $response->assertStatus( 201);
+    }
+
+
+
+
+
+
+
 
 
 

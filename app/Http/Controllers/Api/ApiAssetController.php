@@ -77,6 +77,34 @@ class ApiAssetController extends Controller
         return response()->json(['asset' => $asset], 201);
     }
 
+    public function update(Request $request, $id)
+    {
+//        return $request->body;
+
+        $asset = Asset::findOrFail($id);
+
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|numeric',
+            'title' => 'required|min:8|max:255',
+            'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
+            'quantity' => 'required|numeric|min:0',
+            'paid_value' => 'required|numeric|min:0',
+            'currency' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return $validator->messages();
+        }
+
+        $asset->update($request->all());
+
+        return response()->json(['asset' => $asset], 201);
+    }
+
+
+
+
     public function delete(Request $request)
     {
 

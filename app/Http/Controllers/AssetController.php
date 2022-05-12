@@ -116,13 +116,7 @@ class AssetController extends Controller
         return view('admin.update', ['asset' => $asset, 'currencies' => $currencies]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Asset  $asset
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     */
+
     public function update(Request $request, Asset $asset)
     {
         $inputs = request()->validate([
