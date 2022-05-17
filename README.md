@@ -26,7 +26,15 @@ How to launch it:
 - Clone repository to the Docker container and run it.
 - Install PHP dependencies: composer install.
 - Generate .env file using CML command >> php artisan key:generate.
-- Database name variable should be like >> DB_DATABASE=crypto_task <<.
+- Database name variable should be like : 
+
+  DB_CONNECTION=mysql
+  DB_HOST=mysql
+  DB_PORT=3306
+  DB_DATABASE=crypto_task
+  DB_USERNAME=sail
+  DB_PASSWORD=password 
+
 - This application use external API data, so you need to register to https://coinlayer.com/ and get your access KEY.
 - In .env file create additional variable >> COIN_LAYER_API_KEY=>>>your key from coinlayer.com<<<<.
 - Make migrations using CML command >> sail artisan migrate <<.
