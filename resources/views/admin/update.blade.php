@@ -20,16 +20,19 @@
                        value="{{$asset->title}}">
             </div>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="currency">Options</label>
+                <div class="form-group">
+                    <label for="title">Currency</label>
+                    <input type="text" name="crypto_currency" class="form-control" id="crypto_currency" aria-describeby=""
+                           placeholder="Cur"
+                           value="{{$asset->crypto_currency}}">
                 </div>
-                <select class="custom-select" id="crypto_currency" name="crypto_currency" placeholder="Enter Currency"
-                        value="{{$asset->crypto_currency}}">
-                    <option selected>Choose...</option>
-                    @foreach ($currencies as $currency)
-                        <option value="{{$currency->name}}">{{$currency->name}}</option>
-                    @endforeach
-                </select>
+{{--                <select class="custom-select" id="crypto_currency" name="crypto_currency" placeholder="Enter Currency"--}}
+{{--                        value="{{$asset->crypto_currency}}">--}}
+{{--                    <option selected>Choose...</option>--}}
+{{--                    @foreach ($currencies as $currency)--}}
+{{--                        <option value="{{$currency->name}}">{{$currency->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
             </div>
             <div class="form-group mb-3">
                 <label for="paid_value">Paid Value</label>
