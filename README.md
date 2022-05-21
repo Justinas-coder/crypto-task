@@ -23,7 +23,9 @@ Stack:
 
 How to launch it:
 - Deppending on your OS (win, Ubuntu, Mac) make your system ready to use (https://www.docker.com).
-- Clone repository to the Docker container and run it.
+- Via command line, navigate to project folder and create 
+  a docker container based on the yaml file configuration by 
+  running docker-compose up -d command.
 - Install PHP dependencies: composer install.
 - Generate .env file using CML command >> php artisan key:generate.
 - Database name variable should be like : 
