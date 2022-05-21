@@ -1,9 +1,9 @@
-## Application can manage your your crypto assets and see values.
+### Application can manage your your crypto assets and see values.
 
 - You can create two entities in this Web Application: User and Asset:
 - User can CRUD his Assets.
 
-## Asset:
+### Asset:
 - Has label e.g 'binance'.
 - Currencies available: BTC, ETH, IOTA .
 - Value cannot be negative.
@@ -12,7 +12,7 @@
 - Application get exchange rate from external API.
 
 
-## Stack:
+### Stack:
 
 - Docker
 - Laravel 9x
@@ -21,7 +21,7 @@
 
 
 
-## How to launch it:
+### How to launch it:
 
 1. Deppending on your OS (win, Ubuntu, Mac) make your system ready to use (https://www.docker.com).
 
@@ -61,60 +61,64 @@
 9. Go to http://localhost/login  and enjoy it :)
 
 
-## As HTTP API application returns JSON format.
+### As HTTP API application returns JSON format.
 
-URL: http://localhost/api/assets  returns all created asset with values as e.g. :
+###### URL: http://localhost/api/assets  returns all created asset with values as e.g. :
 
-"id": 5,
-"title": "Testing blach",
-"currency": "MIOTA",
-"quantity": "3",
-"payed_value": "3232",
-"current_value": 1.48593,
-"created_at": "2022-05-06 07:07:41"
+- "id": 5
+- "title": "Testing blach"
+- "currency": "MIOTA"
+- "quantity": "3"
+- "payed_value": "3232"
+- "current_value": 1.48593
+- "created_at": "2022-05-06 07:07:41"
 
-URL: http://localhost/api/assets/total returns total values of each currency, 
+###### URL: http://localhost/api/assets/total returns total values of each currency, 
 value is calculated with live data from external API. e.g :
 
-[
+- [
 {
 "currency": "BTC",
 "current_value": 2089086.5048939998
 },
-{
+- {
 "currency": "ETH",
 "current_value": 8069.964915
 },
-{
+- {
 "currency": "MIOTA",
 "current_value": 1.46922
 }
 ]
 
-For asset "store"  use HTTP POST method with URL :
+###### For asset "store"  use HTTP POST method with URL :
 
 http://localhost/api/assets
 
 API receives request with data as bellow e.g.
 
-'user_id' => 'required|numeric',
-'title' => 'required|min:8|max:255',
-'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
-'quantity' => 'required|numeric|min:0',
-'paid_value' => 'required|numeric|min:0',
-'currency' => 'required',
+- 'user_id' => 'required|numeric',
+- 'title' => 'required|min:8|max:255',
+- 'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
+- 'quantity' => 'required|numeric|min:0',
+- 'paid_value' => 'required|numeric|min:0',
+- 'currency' => 'required',
 
-For asset "delete"  use HTTP DELETE method with URL :
+###### For asset "delete"  use HTTP DELETE method with URL :
 
 http://localhost/api/assets
 
-Request should have asset "id" .
+- Request should have asset "id" .
 
-For asset "update"  use HTTP PUT method with URL :
+###### For asset "update"  use HTTP PUT method with URL :
 
 http://localhost/api/assets/{id} 
 
 End point of this URL is Asset id number.
 
 
-Run PHP Unitest for Asset store and DB check for Web and Api applications with CML command >> "sail artisan test".
+###### Run PHP Unitest for Asset store and DB check for Web and Api applications with CML command 
+```
+./vendor/bin/sail artisan test
+```
+
