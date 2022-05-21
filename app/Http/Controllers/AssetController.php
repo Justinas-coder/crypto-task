@@ -36,6 +36,7 @@ class AssetController extends Controller
                 'current_value' => auth()->user()->assets()->where('crypto_currency',
                         $currency->name)->sum('quantity') * $currencies_stock['rates'][$currency->name],
             ];
+
         }
 
         if ($request->asset) {
