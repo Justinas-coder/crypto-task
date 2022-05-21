@@ -61,7 +61,7 @@
 9. Application use external API https://coinlayer.com/ data, so you need to get you API KEY and create
 variable in .env file as bellow:
 
-#####COIN_LAYER_API_KEY="YOUR KEY"
+##### COIN_LAYER_API_KEY="YOUR KEY"
 
 10. Go to http://localhost/login  and enjoy it :)
 
