@@ -1,9 +1,9 @@
-# Application can manage your your crypto assets and see values.
+## Application can manage your your crypto assets and see values.
 
 - You can create two entities in this Web Application: User and Asset:
 - User can CRUD his Assets.
 
-# Asset:
+## Asset:
 - Has label e.g 'binance'.
 - Currencies available: BTC, ETH, IOTA .
 - Value cannot be negative.
@@ -12,7 +12,7 @@
 - Application get exchange rate from external API.
 
 
-# Stack:
+## Stack:
 
 - Docker
 - Laravel 9x
@@ -21,7 +21,7 @@
 
 
 
-# How to launch it:
+## How to launch it:
 
 1. Deppending on your OS (win, Ubuntu, Mac) make your system ready to use (https://www.docker.com).
 
@@ -42,18 +42,14 @@
     laravelsail/php81-composer:latest \
     composer install --ignore-platform-reqs
 ```
-
 5. Start containers
 ```
     ./vendor/bin/sail up -d
-
 ```
-
 6. Generate app encryption key
 ```
 ./vendor/bin/sail php key:generate
 ```
-
 7. Make migrations using CML command
 ```
 ./vendor/bin/sail artisan migrate
@@ -65,7 +61,7 @@
 9. Go to http://localhost/login  and enjoy it :)
 
 
-# As HTTP API application returns JSON format.
+## As HTTP API application returns JSON format.
 
 URL: http://localhost/api/assets  returns all created asset with values as e.g. :
 
