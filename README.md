@@ -1,9 +1,9 @@
-1 -  Application can manage your your crypto assets and see values.
+# Application can manage your your crypto assets and see values.
 
 - You can create two entities in this Web Application: User and Asset:
 - User can CRUD his Assets.
 
-Asset:
+# Asset:
 - Has label e.g 'binance'.
 - Currencies available: BTC, ETH, IOTA .
 - Value cannot be negative.
@@ -12,7 +12,7 @@ Asset:
 - Application get exchange rate from external API.
 
 
-Stack:
+# Stack:
 
 - Docker
 - Laravel 9x
@@ -21,30 +21,51 @@ Stack:
 
 
 
-How to launch it:
-- Deppending on your OS (win, Ubuntu, Mac) make your system ready to use (https://www.docker.com).
-- Via command line, navigate to project folder and create 
-  a docker container based on the yaml file configuration by 
-  running docker-compose up -d command.
-- Install PHP dependencies: composer install.
-- Generate .env file using CML command >> php artisan key:generate.
-- Database name variable should be like : 
+# How to launch it:
 
-  DB_CONNECTION=mysql
-  DB_HOST=mysql
-  DB_PORT=3306
-  DB_DATABASE=crypto_task
-  DB_USERNAME=sail
-  DB_PASSWORD=password 
+1. Deppending on your OS (win, Ubuntu, Mac) make your system ready to use (https://www.docker.com).
 
-- This application use external API data, so you need to register to https://coinlayer.com/ and get your access KEY.
-- In .env file create additional variable >> COIN_LAYER_API_KEY=>>>your key from coinlayer.com<<<<.
-- Make migrations using CML command >> sail artisan migrate <<.
-- Seed database using CML command >> sail artisan db:seed <<.
-- Go to http://localhost/login  and enjoy it :)
+2. Clone this repo
+
+   https://github.com/Justinas-coder/crypto-task
+
+3. Create .env file
+```
+   cp .env.example .env
+```
+4. Install PHP dependencies (reference: https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
+```
+    docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+5. Start containers
+```
+    ./vendor/bin/sail up -d
+
+```
+
+6. Generate app encryption key
+```
+./vendor/bin/sail php key:generate
+```
+
+7. Make migrations using CML command
+```
+./vendor/bin/sail artisan migrate
+```
+8. Seed database using CML command.
+```
+./vendor/bin/sail artisan db:seed
+```
+9. Go to http://localhost/login  and enjoy it :)
 
 
-As HTTP API application returns JSON format.
+# As HTTP API application returns JSON format.
 
 URL: http://localhost/api/assets  returns all created asset with values as e.g. :
 
