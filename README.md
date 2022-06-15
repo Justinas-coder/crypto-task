@@ -68,7 +68,7 @@ COIN_LAYER_API_KEY="YOUR KEY"
 
 ### As HTTP API application returns JSON format.
 
-#### URL: http://localhost/api/assets  returns all created asset with values as e.g. :
+#### URL: ```http://localhost/api/assets```  returns all created asset with values as e.g. :
 
 - "id": 5
 - "title": "Testing blach"
