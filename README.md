@@ -98,7 +98,7 @@ value is calculated with live data from external API. e.g :
 
 #### For asset "store"  use HTTP POST method with URL :
 
-http://localhost/api/assets
+```http://localhost/api/assets```
 
 API receives request with data as bellow e.g.
 
@@ -111,13 +111,13 @@ API receives request with data as bellow e.g.
 
 #### For asset "delete"  use HTTP DELETE method with URL :
 
-http://localhost/api/assets
+```http://localhost/api/assets```
 
 - Request should have asset "id" .
 
 #### For asset "update"  use HTTP PUT method with URL :
 
-http://localhost/api/assets/{id} 
+```http://localhost/api/assets/{id}``` 
 
 End point of this URL is Asset id number.
 
