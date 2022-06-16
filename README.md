@@ -68,7 +68,11 @@ COIN_LAYER_API_KEY="YOUR KEY"
 
 ### As HTTP API application returns JSON format.
 
-#### URL: ```http://localhost/api/assets```  returns all created asset with values as e.g. :
+#### URL: 
+```
+http://localhost/api/assets
+```  
+returns all created asset with values as e.g. :
 
 - "id": 5
 - "title": "Testing blach"
@@ -78,7 +82,11 @@ COIN_LAYER_API_KEY="YOUR KEY"
 - "current_value": 1.48593
 - "created_at": "2022-05-06 07:07:41"
 
-#### URL: http://localhost/api/assets/total returns total values of each currency, 
+#### URL: 
+```
+http://localhost/api/assets/total
+```
+returns total values of each currency, 
 value is calculated with live data from external API. e.g :
 
 - [
@@ -98,7 +106,9 @@ value is calculated with live data from external API. e.g :
 
 #### For asset "store"  use HTTP POST method with URL :
 
-```http://localhost/api/assets```
+```
+http://localhost/api/assets
+```
 
 API receives request with data as bellow e.g.
 
@@ -111,13 +121,17 @@ API receives request with data as bellow e.g.
 
 #### For asset "delete"  use HTTP DELETE method with URL :
 
-```http://localhost/api/assets```
+```
+http://localhost/api/assets
+```
 
 - Request should have asset "id" .
 
 #### For asset "update"  use HTTP PUT method with URL :
 
-```http://localhost/api/assets/{id}``` 
+```
+http://localhost/api/assets/{id}
+``` 
 
 End point of this URL is Asset id number.
 
