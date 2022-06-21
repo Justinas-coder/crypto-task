@@ -141,3 +141,5 @@ End point of this URL is Asset id number.
 ./vendor/bin/sail artisan test
 ```
 
+END
+
