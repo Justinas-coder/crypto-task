@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\HttpClientService;
 use App\Models\Asset;
 use App\Models\Currency;
 use Illuminate\Http\Request;
@@ -11,19 +12,13 @@ use Illuminate\Validation\Rule;
 
 class AssetController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, HttpClientService $service)
     {
         $currencies = Currency::all();
 
-        /**
-         * #2-1 using Laravel HTTP Client
-         */
-        $response = Http::get('http://api.coinlayer.com/live', [
-            "access_key" => config('services.coin_layer.api_key'),
-            "symbols" => "BTC,ETH,MIOTA"
-        ]);
+        $currencies_stock = $service->httpClientResponse();
 
-        $currencies_stock = ($response->json());
+        dd($currencies_stock);
 
         $asset_quantities = [];
 
@@ -36,7 +31,6 @@ class AssetController extends Controller
                 'current_value' => auth()->user()->assets()->where('crypto_currency',
                         $currency->name)->sum('quantity') * $currencies_stock['rates'][$currency->name],
             ];
-
         }
 
         if ($request->asset) {
@@ -63,13 +57,23 @@ class AssetController extends Controller
 
     public function store(Request $request)
     {
+
+//        $service->storeNewAsset(
+////            $request->title,
+////            $request->crypto_currency,
+////            $request->quantity,
+////            $request->paid_value,
+////            $request->currency
+////        );
+
         $inputs = $request->validate([
             'title' => 'required|min:8|max:255',
             'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
-            'quantity' => 'required|numeric|min:0',
+            'quantity' => 'required|numeric|min:1',
             'paid_value' => 'required|numeric|min:0',
             'currency' => 'required',
         ]);
+
 
         auth()->user()->assets()->create($inputs);
         session()->flash('asset-created-message', 'Asset was Created');
