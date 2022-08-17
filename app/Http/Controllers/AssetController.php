@@ -18,8 +18,6 @@ class AssetController extends Controller
 
         $currencies_stock = $service->httpClientResponse();
 
-        dd($currencies_stock);
-
         $asset_quantities = [];
 
         foreach ($currencies as $currency) {
@@ -58,13 +56,7 @@ class AssetController extends Controller
     public function store(Request $request)
     {
 
-//        $service->storeNewAsset(
-////            $request->title,
-////            $request->crypto_currency,
-////            $request->quantity,
-////            $request->paid_value,
-////            $request->currency
-////        );
+
 
         $inputs = $request->validate([
             'title' => 'required|min:8|max:255',

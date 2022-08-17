@@ -14,10 +14,7 @@ class HttpClientService
         /**
          * #2-1 using Laravel HTTP Client
          */
-
-        $currencies = Currency::get();
-
-        $currency_type = $currencies->implode('name', ', ');
+        $currency_type = Currency::get()->implode('name', ', ');
 
         $response = Http::get('http://api.coinlayer.com/live', [
             "access_key" => config('services.coin_layer.api_key'),
