@@ -24,7 +24,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="crypto_currency">Crypto_currency</label>
                 </div>
-                <select class="custom-select" id="currency" name="currency">
+                <select class="custom-select" id="crypto_currency" name="crypto_currency">
                     @foreach ($currencies as $currency)
                         <option value="{{$currency->name}}">{{$currency->name}}</option>
                     @endforeach                </select>

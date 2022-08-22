@@ -3,18 +3,23 @@
 namespace App\Http\Services;
 
 use App\Models\Asset;
+use Illuminate\Support\Facades\Auth;
 
 class AssetService
 {
+
+    // return Asset $asset
     public function storeNewAsset(
+        int $user_id,
         string $title,
         string $crypto_currency,
-        string $quantity,
-        string $paid_value,
+        int $quantity,
+        int $paid_value,
         string $currency
     ): Asset
     {
         $asset = Asset::create([
+            'user_id' => $user_id,
             'title' => $title,
             'crypto_currency' => $crypto_currency,
             'quantity' => $quantity,
@@ -25,9 +30,6 @@ class AssetService
         return $asset;
 
 }
-
-
-
 
 }
 
