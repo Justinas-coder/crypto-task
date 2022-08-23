@@ -55,9 +55,9 @@
 
 7. Make migrations using CML command (Set the database connection in .env before migrating as bellow:
 
-DB_DATABASE=crypto_task
-DB_USERNAME=sail
-DB_PASSWORD=password)
+- DB_DATABASE=crypto_task
+- DB_USERNAME=sail
+- DB_PASSWORD=password)
 
 ```
 ./vendor/bin/sail artisan migrate
