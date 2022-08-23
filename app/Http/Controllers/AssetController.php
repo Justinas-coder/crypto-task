@@ -81,7 +81,6 @@ class AssetController extends Controller
 
         auth()->user()->assets()->where('id', $asset->id)->update($request->validated());
 
-
         Session::flash('asset-updated-message', 'Asset'.':  '.$request['title'].'  '.'was Updated');
         return redirect()->route('asset.index');
     }

@@ -29,11 +29,7 @@
 ```
    git clone https://github.com/Justinas-coder/crypto-task
 ```
-3. Create .env file
-```
-   cp .env.example .env
-```
-4. Install PHP dependencies (reference: https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
+3. Install PHP dependencies (reference: https://laravel.com/docs/9.x/sail#installing-composer-dependencies-for-existing-projects)
 ```
     docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -42,15 +38,27 @@
     laravelsail/php81-composer:latest \
     composer install --ignore-platform-reqs
 ```
-5. Start containers
+4. Create .env file
 ```
-    ./vendor/bin/sail up -d
+   cp .env.example .env
 ```
-6. Generate app encryption key
+
+5. Generate app encryption key
 ```
 ./vendor/bin/sail artisan key:generate
 ```
-7. Make migrations using CML command
+
+6. Start containers
+```
+    ./vendor/bin/sail up -d
+```
+
+7. Make migrations using CML command (Set the database connection in .env before migrating as bellow:
+
+DB_DATABASE=crypto_task
+DB_USERNAME=sail
+DB_PASSWORD=password)
+
 ```
 ./vendor/bin/sail artisan migrate
 ```
@@ -63,7 +71,7 @@ variable in .env file as bellow:
 ```
 COIN_LAYER_API_KEY="YOUR KEY"
 ```
-10. Go to http://localhost/login  and enjoy it :)
+10. You can now access the server at http://localhost/login  
 
 
 ### As HTTP API application returns JSON format.
