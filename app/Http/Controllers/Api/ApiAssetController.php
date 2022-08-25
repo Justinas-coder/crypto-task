@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssetValidationRequest;
 use App\Http\Resources\AssetResource;
-use App\Http\Resources\AssetSumResource;
+use App\Http\Services\AssetService;
 use App\Http\Services\HttpClientService;
 use App\Models\Asset;
 use App\Models\Currency;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-
 
 
 class ApiAssetController extends Controller
@@ -41,50 +39,25 @@ class ApiAssetController extends Controller
         return $asset_quantities;
     }
 
-    public function store(Request $request)
+    public function store(AssetValidationRequest $request, AssetService $service)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'title' => 'required|min:8|max:255',
-            'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
-            'quantity' => 'required|numeric|min:0',
-            'paid_value' => 'required|numeric|min:0',
-            'currency' => 'required',
-        ]);
+        $asset = $service->storeNewAsset(
 
-       if($validator->fails()){
-           return $validator->messages();
-       }
-
-        $asset = Asset::create([
-            'user_id' => $request->user_id,
-            'title' => $request->title,
-            'crypto_currency' => $request->crypto_currency,
-            'quantity' => $request->quantity,
-            'paid_value' => $request->paid_value,
-            'currency' => $request->currency
-        ]);
+            auth('sanctum')->user()->id,
+            $request->title,
+            $request->crypto_currency,
+            $request->quantity,
+            $request->paid_value,
+            $request->currency
+        );
         return response()->json(['asset' => $asset], 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(AssetValidationRequest $request, $id)
     {
         $asset = Asset::findOrFail($id);
 
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'title' => 'required|min:8|max:255',
-            'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
-            'quantity' => 'required|numeric|min:0',
-            'paid_value' => 'required|numeric|min:0',
-            'currency' => 'required',
-        ]);
-
-        if($validator->fails()) {
-            return $validator->messages();
-        }
-
-        $asset->update($request->all());
+        auth('sanctum')->user()->assets()->where('id', $asset->id)->update($request->validated());
 
         return response()->json(['asset' => $asset], 201);
     }

@@ -28,7 +28,7 @@ class AssetValidationRequest extends FormRequest
 
         return [
             'title' => 'required|min:8|max:255',
-            'crypto_currency' => 'required', Rule::in([Currency::get()->implode('name', ', ')]),
+            'crypto_currency' => Rule::in(Currency::get()->pluck('name')->toArray()),
             'quantity' => 'required|numeric|min:1',
             'paid_value' => 'required|numeric|min:1',
             'currency' => 'required',

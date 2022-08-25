@@ -3,7 +3,6 @@
 namespace App\Http\Services;
 
 use App\Models\Asset;
-use Illuminate\Support\Facades\Auth;
 
 class AssetService
 {

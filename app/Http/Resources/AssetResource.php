@@ -2,9 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Currency;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Asset;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class AssetResource extends JsonResource
@@ -23,9 +22,8 @@ class AssetResource extends JsonResource
          */
         $response = Http::get('http://api.coinlayer.com/live', [
             "access_key" => config('services.coin_layer.api_key'),
-            "symbols" => "BTC,ETH,MIOTA"
+            "symbols" => Currency::get()->implode('name', ', ')
         ]);
-
 
         $currencies_stock = ($response->json());
 

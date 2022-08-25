@@ -8,6 +8,7 @@ use App\Http\Services\HttpClientService;
 use App\Models\Asset;
 use App\Models\Currency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 class AssetController extends Controller

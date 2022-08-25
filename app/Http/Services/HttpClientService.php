@@ -11,19 +11,30 @@ class HttpClientService
 {
     public function httpClientResponse()
     {
-        /**
-         * #2-1 using Laravel HTTP Client
-         */
-        $currency_type = Currency::get()->implode('name', ', ');
+//        /**
+//         * #2-1 using Laravel HTTP Client
+//         */
+//
+//
+//        $response = Http::get('http://api.coinlayer.com/live', [
+//            "access_key" => config('services.coin_layer.api_key'),
+//            "symbols" => Currency::get()->implode('name', ', ')
+//        ]);
+//
+//
+//        $currencies_stock = ($response->json());
 
-        $response = Http::get('http://api.coinlayer.com/live', [
-            "access_key" => config('services.coin_layer.api_key'),
-            "symbols" => $currency_type
-        ]);
+        //** In Case of limited access to Coin Layer, temporary use fake data */
 
-        $currencies_stock = ($response->json());
+        $currencies_stock_fake [] = ['rates' => [
+            "BTC" => 21654.144787,
+            "ETH" => 1700.76,
+            "MIOTA" => 0.30422
+        ]];
 
-        return $currencies_stock;
+//        $currencies_stock = ($currencies_stock_fake->json());
+
+        return $currencies_stock_fake;
     }
 
 
