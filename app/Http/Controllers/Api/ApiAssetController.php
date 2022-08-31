@@ -7,11 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetValidationRequest;
 use App\Http\Resources\AssetResource;
 use App\Http\Services\AssetService;
-use App\Http\Services\HttpClientService;
 use App\Models\Asset;
 use App\Models\Currency;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 
 class ApiAssetController extends Controller
@@ -21,26 +19,24 @@ class ApiAssetController extends Controller
         return AssetResource::collection(Asset::all());
     }
 
-    public function showTotalSum(Request $request, HttpClientService $service)
+    public function showTotalSum(AssetService $service)
     {
-        $currencies = Currency::all();
+        $asset_quantities = $service->assetQuantitiesIndex();
+        return response()->json(['data' => $asset_quantities]);
+    }
 
-        $currencies_stock = $service->httpClientResponse();
+    public function showSingleAssetData(AssetService $service, $id){
 
-        $asset_quantities = [];
+            $asset = $service->getSingleAssetData($id);
 
-        foreach ($currencies as $currency) {
-            $asset_quantities[] = [
-                'currency' => $currency->name,
-                'current_value' => Asset::where('crypto_currency',
-                        $currency->name)->sum('quantity') * $currencies_stock['rates'][$currency->name],
-            ];
-        }
-        return $asset_quantities;
+            return response()->json(['data' => $asset]);
+
     }
 
     public function store(AssetValidationRequest $request, AssetService $service)
     {
+
+
         $asset = $service->storeNewAsset(
 
             auth('sanctum')->user()->id,
@@ -62,21 +58,11 @@ class ApiAssetController extends Controller
         return response()->json(['asset' => $asset], 201);
     }
 
-    public function delete(Request $request)
+    public function delete($id, AssetService $service)
     {
-        $validator = Validator::make($request->all(), [
-            'id' => 'required|numeric',
-        ]);
+        $response = $service->apiAssetDelete($id);
 
-        if($validator->fails()){
-            return $validator->messages();
-        }
-
-        $asset = Asset::findOrFail($request->id);
-
-        $asset->delete();
-
-        return response()->json('deleted', 204);
+        return $response;
     }
 
 

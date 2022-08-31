@@ -26,7 +26,7 @@ class HttpClientService
 
         //** In Case of limited access to Coin Layer, temporary use fake data */
 
-        $currencies_stock_fake [] = ['rates' => [
+        $currencies_stock_fake = ['rates' => [
             "BTC" => 21654.144787,
             "ETH" => 1700.76,
             "MIOTA" => 0.30422

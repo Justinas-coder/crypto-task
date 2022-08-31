@@ -57,7 +57,7 @@
 
 - DB_DATABASE=crypto_task
 - DB_USERNAME=sail
-- DB_PASSWORD=password)
+- DB_PASSWORD=password
 
 ```
 ./vendor/bin/sail artisan migrate
@@ -67,9 +67,9 @@
 ./vendor/bin/sail artisan db:seed
 ```
 9. Application use external API https://coinlayer.com/ data, so you need to get you API KEY and create
-variable in .env file as bellow:
+fill in .env variable, as bellow:
 ```
-COIN_LAYER_API_KEY="YOUR KEY"
+COIN_LAYER_API_KEY="YOUR KEY = Your Key."
 ```
 10. You can now access the server at http://localhost/login  
 
@@ -80,15 +80,19 @@ COIN_LAYER_API_KEY="YOUR KEY"
 ```
 http://localhost/api/assets
 ```  
-returns all created asset with values as e.g. :
+returns all created asset with values in JSON data format as e.g. :
 
-- "id": 5
-- "title": "Testing blach"
-- "currency": "MIOTA"
-- "quantity": "3"
-- "payed_value": "3232"
-- "current_value": 1.48593
-- "created_at": "2022-05-06 07:07:41"
+"asset": {
+    "id": 3,
+    "user_id": 1,
+    "title": "Testing Jason 3",
+    "crypto_currency": "BTC",
+    "quantity": "2",
+    "paid_value": "32",
+    "currency": "USD",
+    "created_at": "2022-08-24T13:12:32.000000Z",
+    "updated_at": "2022-08-26T07:23:54.000000Z"
+}
 
 #### URL: 
 ```
@@ -97,7 +101,6 @@ http://localhost/api/assets/total
 returns total values of each currency, 
 value is calculated with live data from external API. e.g :
 
-- [
 {
 "currency": "BTC",
 "current_value": 2089086.5048939998
@@ -110,7 +113,7 @@ value is calculated with live data from external API. e.g :
 "currency": "MIOTA",
 "current_value": 1.46922
 }
-]
+
 
 #### For asset "store"  use HTTP POST method with URL :
 
@@ -118,14 +121,15 @@ value is calculated with live data from external API. e.g :
 http://localhost/api/assets
 ```
 
-API receives request with data as bellow e.g.
+API receives request with JSON data as bellow e.g.
 
-- 'user_id' => 'required|numeric',
-- 'title' => 'required|min:8|max:255',
-- 'crypto_currency' => ['required', Rule::in(['BTC', 'ETH', 'MIOTA'])],
-- 'quantity' => 'required|numeric|min:0',
-- 'paid_value' => 'required|numeric|min:0',
-- 'currency' => 'required',
+{
+"title": "Testing Jason POST",
+"crypto_currency": "BTC",
+"quantity": "2",
+"paid_value": "32",
+"currency": "USD"
+}
 
 #### For asset "delete"  use HTTP DELETE method with URL :
 

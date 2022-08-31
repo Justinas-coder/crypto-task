@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/assets', [ApiAssetController::class, 'index']);
-Route::get('/assets/total', [ApiAssetController::class, 'showTotalSum']);
+
 
 Route::middleware('auth:sanctum')
     ->group(function () {
 
+        Route::get('/assets', [ApiAssetController::class, 'index']);
+        Route::get('/assets/{id}', [ApiAssetController::class, 'showSingleAssetData']);
+        Route::get('/assets/total', [ApiAssetController::class, 'showTotalSum']);
         Route::post('/assets', [ApiAssetController::class, 'store']);
-        Route::delete('/assets', [ApiAssetController::class, 'delete']);
+        Route::delete('/assets/{id}', [ApiAssetController::class, 'delete']);
         Route::put('/assets/{id}', [ApiAssetController::class, 'update']);
     });
 
