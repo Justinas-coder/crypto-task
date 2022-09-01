@@ -89,8 +89,10 @@ class ApiAssetTest extends TestCase
         );
 
         $asset = Asset::factory()->create();
-        $response = $this->delete('/api/assets'. $asset->id);
 
-        $response->assertStatus(404);
+
+        $response = $this->delete('/api/assets/'. $asset->id);
+
+        $response->assertStatus(200);
     }
 }
