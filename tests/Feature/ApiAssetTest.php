@@ -7,8 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Laravel\Sanctum\Sanctum;
-use Faker\Generator as Faker;
-use Illuminate\Support\Str;
+
 
 class ApiAssetTest extends TestCase
 {
@@ -22,7 +21,6 @@ class ApiAssetTest extends TestCase
         $this->artisan('db:seed');
 
     }
-
 
     public $asset = [];
 
@@ -40,8 +38,6 @@ class ApiAssetTest extends TestCase
         ];
     }
 
-
-
     public function test_api_asset_store_response()
     {
          Sanctum::actingAs(
@@ -49,11 +45,9 @@ class ApiAssetTest extends TestCase
             ['*']
         );
 
-
         $response = $this->postJson('/api/assets', $this->asset);
 
         $this->asset = $response['asset'];
-
 
         $response->assertStatus( 201);
     }
@@ -89,7 +83,6 @@ class ApiAssetTest extends TestCase
         );
 
         $asset = Asset::factory()->create();
-
 
         $response = $this->delete('/api/assets/'. $asset->id);
 
