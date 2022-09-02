@@ -71,10 +71,61 @@ fill in .env variable, as bellow:
 ```
 COIN_LAYER_API_KEY="YOUR KEY = Your Key."
 ```
-10. You can now access the server at http://localhost/login  
+10. You can now access the server at http://localhost/login.
+For testing purpose you can create User by "Register" button, and fulfilling login form,
+or using CML command, using Tinker:
 
+```
+php artisan tinker
+```
+```
+User::factory()->create()
+```
+
+name: "John Doe",
+email: "John@dot.com",
+password: "password"
 
 ### As HTTP API application returns JSON format.
+
+API authentication protected with Sanctum guard.
+When making requests using API tokens, the token 
+should be included in the Authorization header as a Bearer token.
+https://laravel.com/docs/9.x/sanctum#api-token-authentication
+
+For API testing personal_access_token need to be generated using Tinker. In CML put commands as bellow:
+
+```
+php artisan tinker
+```
+```
+$user = User::first();
+```
+```
+$user->createToken('developer-access');
+```
+
+and now PlainTextToken was generates. aAs e.g. bellow:
+
+     +plainTextToken: "1|pceV0SXIpglwt5y3sQF167jsqBczJ51dXpsmla8A",
+
+#### URL:
+```
+http://localhost/api/assets/{id}
+```  
+returns single asset by id with values in JSON data format as e.g. :
+
+"asset": {
+"id": 3,
+"user_id": 1,
+"title": "Testing Jason 3",
+"crypto_currency": "BTC",
+"quantity": "2",
+"paid_value": "32",
+"currency": "USD",
+"created_at": "2022-08-24T13:12:32.000000Z",
+"updated_at": "2022-08-26T07:23:54.000000Z"
+}
 
 #### URL: 
 ```
@@ -134,10 +185,10 @@ API receives request with JSON data as bellow e.g.
 #### For asset "delete"  use HTTP DELETE method with URL :
 
 ```
-http://localhost/api/assets
+http://localhost/api/assets/{id}
 ```
 
-- Request should have asset "id" .
+- Delete asset by "id" number.
 
 #### For asset "update"  use HTTP PUT method with URL :
 
@@ -146,6 +197,16 @@ http://localhost/api/assets/{id}
 ``` 
 
 End point of this URL is Asset id number.
+
+API receives JSON data as bellow e.g.
+
+{
+"title": "Testing Jason 5",
+"crypto_currency": "BTC",
+"quantity": "2",
+"paid_value": "32",
+"currency": "USD"
+}
 
 
 #### Run PHP Unitest for Asset store and DB check for Web and Api applications with CML command 

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,5 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([CurrenciesSeeder::class]);
+
     }
 }
