@@ -55,6 +55,8 @@ class ApiAssetController extends Controller
 
         auth('sanctum')->user()->assets()->where('id', $asset->id)->update($request->validated());
 
+        $asset->refresh();
+
         return response()->json(['asset' => $asset], 201);
     }
 

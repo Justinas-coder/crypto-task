@@ -58,4 +58,7 @@ class AssetTest extends TestCase
 
         $this->assertDatabaseHas('assets', $this->asset);
     }
+
+    //Sederis gamintu useri.
+    //testuose per
 }
