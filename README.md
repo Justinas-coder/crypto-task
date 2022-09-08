@@ -53,11 +53,7 @@ composer install --ignore-platform-reqs
 ./vendor/bin/sail artisan key:generate
 ```
 
-7. Make migrations using CML command (Set the database connection in .env before migrating as bellow:
-
-- DB_DATABASE=crypto_task
-- DB_USERNAME=sail
-- DB_PASSWORD=password
+7. Make migrations using CML command as bellow:
 
 ```
 ./vendor/bin/sail artisan migrate
@@ -90,19 +86,19 @@ password will be  "password".
 
 ### As HTTP API application returns JSON format.
 
-POST /api/assets HTTP/1.1
-Host: localhost
-Accept: application/json
-Authorization: Bearer 4|WYXNJ7vStXHfSqGUvCgJJWyls4HA5nGKhHApWtSu
-Content-Type: application/json
-Content-Length: 128
+POST /api/assets HTTP/1.1 \
+Host: localhost\
+Accept: application/json\
+Authorization: Bearer 4|WYXNJ7vStXHfSqGUvCgJJWyls4HA5nGKhHApWtSu\
+Content-Type: application/json\
+Content-Length: 128\
 
-{
-"title": "TestingPOST",
-"crypto_currency": "BTC",
-"quantity": "2",
-"paid_value": "32",
-"currency": "USD"
+{\
+"title": "TestingPOST",\
+"crypto_currency": "BTC",\
+"quantity": "2",\
+"paid_value": "32",\
+"currency": "USD"\
 }
 
 For API testing plainTextToken need to be generated using Tinker. In CML put commands as bellow:
@@ -125,18 +121,18 @@ and now PlainTextToken was generates. as e.g. bellow:
 ```
 http://localhost/api/assets/{id}
 ```  
-returns single asset by id with values in JSON data format as e.g. :
+returns single asset by id with values in JSON data format as e.g. :\
 
-"asset": {
-"id": 3,
-"user_id": 1,
-"title": "Testing Jason 3",
-"crypto_currency": "BTC",
-"quantity": "2",
-"paid_value": "32",
-"currency": "USD",
-"created_at": "2022-08-24T13:12:32.000000Z",
-"updated_at": "2022-08-26T07:23:54.000000Z"
+"asset": {\
+"id": 3,\
+"user_id": 1,\
+"title": "Testing Jason 3",\
+"crypto_currency": "BTC",\
+"quantity": "2",\
+"paid_value": "32",\
+"currency": "USD",\
+"created_at": "2022-08-24T13:12:32.000000Z",\
+"updated_at": "2022-08-26T07:23:54.000000Z"\
 }
 
 #### URL GET method:
@@ -145,16 +141,16 @@ http://localhost/api/assets
 ```  
 returns all created asset with values in JSON data format as e.g. :
 
-- "asset": {
-"id": 3,
-"user_id": 1,
-"title": "Testing Jason 3",
-"crypto_currency": "BTC",
-"quantity": "2",
-"paid_value": "32",
-"currency": "USD",
-"created_at": "2022-08-24T13:12:32.000000Z",
-"updated_at": "2022-08-26T07:23:54.000000Z"
+- "asset": {\
+"id": 3,\
+"user_id": 1,\
+"title": "Testing Jason 3",\
+"crypto_currency": "BTC",\
+"quantity": "2",\
+"paid_value": "32",\
+"currency": "USD",\
+"created_at": "2022-08-24T13:12:32.000000Z",\
+"updated_at": "2022-08-26T07:23:54.000000Z"\
 }
 
 #### URL GET method:
@@ -186,12 +182,12 @@ http://localhost/api/assets
 
 API receives request with JSON data as bellow e.g.
 
-- {
-"title": "Testing Jason POST",
-"crypto_currency": "BTC",
-"quantity": "2",
-"paid_value": "32",
-"currency": "USD"
+- {\
+"title": "Testing Jason POST",\
+"crypto_currency": "BTC",\
+"quantity": "2",\
+"paid_value": "32",\
+"currency": "USD"\
 }
 
 #### For asset "delete"  use HTTP DELETE method with URL :
@@ -212,12 +208,12 @@ End point of this URL is Asset id number.
 
 API receives JSON data as bellow e.g.
 
-{
-"title": "Testing Jason 5",
-"crypto_currency": "BTC",
-"quantity": "2",
-"paid_value": "32",
-"currency": "USD"
+{\
+"title": "Testing Jason 5",\
+"crypto_currency": "BTC",\
+"quantity": "2",\
+"paid_value": "32",\
+"currency": "USD"\
 }
 
 
