@@ -80,6 +80,8 @@ class AssetService
 
     public function getSingleAssetData($id){
 
+
+
         if (Asset::where('id', $id)->exists() && auth('sanctum')->user()->id === Asset::where('id', $id)->value('user_id')){
 
             $asset = auth('sanctum')->user()->assets()->where('id', $id)->get();

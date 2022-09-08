@@ -28,8 +28,7 @@ class AssetTest extends TestCase
     {
         parent::__construct();
         $this->asset = [
-            'id' => '1',
-            'user_id' => '1',
+
             'title' => 'Binanceeee',
             'crypto_currency' => 'MIOTA',
             'quantity' => '2',
@@ -59,6 +58,5 @@ class AssetTest extends TestCase
         $this->assertDatabaseHas('assets', $this->asset);
     }
 
-    //Sederis gamintu useri.
-    //testuose per
+
 }

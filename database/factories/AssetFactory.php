@@ -18,7 +18,7 @@ class AssetFactory extends Factory
     {
         return [
             'id' => '1',
-            'user_id' => '2',
+            'user_id' => '1',
             'title' => 'Binanceeee',
             'crypto_currency' => 'MIOTA',
             'quantity' => '2',

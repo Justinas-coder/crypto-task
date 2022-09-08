@@ -14,8 +14,7 @@ class HttpClientService
 //        /**
 //         * #2-1 using Laravel HTTP Client
 //         */
-//
-//
+
         $response = Http::get('http://api.coinlayer.com/live', [
             "access_key" => config('services.coin_layer.api_key'),
             "symbols" => Currency::get()->implode('name', ', ')
@@ -38,8 +37,4 @@ class HttpClientService
 //
 //        return $currencies_stock_fake;
     }
-
-
-
-
 }

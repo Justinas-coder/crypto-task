@@ -21,22 +21,18 @@ class ApiAssetController extends Controller
 
     public function showTotalSum(AssetService $service)
     {
-        $asset_quantities = $service->assetQuantitiesIndex();
-        return response()->json(['data' => $asset_quantities]);
+        return response()->json(['data' => $service->assetQuantitiesIndex()]);
     }
 
     public function showSingleAssetData(AssetService $service, $id){
 
-            $asset = $service->getSingleAssetData($id);
 
-            return response()->json(['data' => $asset]);
+            return response()->json(['data' => $service->getSingleAssetData($id)]);
 
     }
 
     public function store(AssetValidationRequest $request, AssetService $service)
     {
-
-
         $asset = $service->storeNewAsset(
 
             auth('sanctum')->user()->id,
@@ -53,7 +49,10 @@ class ApiAssetController extends Controller
     {
         $asset = Asset::findOrFail($id);
 
-        auth('sanctum')->user()->assets()->where('id', $asset->id)->update($request->validated());
+        auth('sanctum')->
+        user()->assets()->
+        where('id', $asset->id)->
+        update($request->validated());
 
         $asset->refresh();
 

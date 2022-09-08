@@ -4,9 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class UserSeeder extends Seeder
 {
+
+    use HasApiTokens;
+
+
     /**
      * Run the database seeds.
      *
@@ -15,6 +22,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = User::factory()->create();
-        $this->$user->createToken('developer-access');
+        $user->createToken('developer-access');
     }
 }

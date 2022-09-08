@@ -28,8 +28,7 @@ class ApiAssetTest extends TestCase
     {
         parent::__construct();
         $this->asset = [
-            'id' => '1',
-            'user_id' => '2',
+
             'title' => 'Binanceeee',
             'crypto_currency' => 'MIOTA',
             'quantity' => '2',
