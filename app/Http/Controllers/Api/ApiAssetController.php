@@ -10,6 +10,8 @@ use App\Http\Services\AssetService;
 use App\Models\Asset;
 use App\Models\Currency;
 use Illuminate\Http\Request;
+use App\Exceptions\AssetNotFoundException;
+use App\Exceptions\NotOwnedAssetException;
 
 
 class ApiAssetController extends Controller
@@ -26,8 +28,18 @@ class ApiAssetController extends Controller
 
     public function showSingleAssetData(AssetService $service, $id){
 
+        try {
+            $data = $service->getSingleAssetData($id);
+            return response()->json(['data' => $data]);
 
-            return response()->json(['data' => $service->getSingleAssetData($id)]);
+        } catch (AssetNotFoundException $exception) {
+
+            return response()->json(['data' => $exception->getMessage()]);
+
+        } catch (NotOwnedAssetException $exception) {
+
+            return response()->json(['data' => $exception->getMessage()]);
+        }
 
     }
 
@@ -61,9 +73,20 @@ class ApiAssetController extends Controller
 
     public function delete($id, AssetService $service)
     {
-        $response = $service->apiAssetDelete($id);
+        try {
+            $response = $service->apiAssetDelete($id);
+            return $response;
 
-        return $response;
+        } catch (AssetNotFoundException $exception) {
+
+            return response()->json(['data' => $exception->getMessage()]);
+
+        } catch (NotOwnedAssetException $exception) {
+
+            return response()->json(['data' => $exception->getMessage()]);
+        }
+
+
     }
 
 

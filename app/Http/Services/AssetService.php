@@ -4,7 +4,10 @@ namespace App\Http\Services;
 
 use App\Models\Asset;
 use App\Models\Currency;
+
 use Illuminate\Http\Request;
+use App\Exceptions\AssetNotFoundException;
+use App\Exceptions\NotOwnedAssetException;
 
 
 class AssetService
@@ -78,18 +81,17 @@ class AssetService
         return $currencies;
     }
 
-    public function getSingleAssetData($id){
-
-
-
-        if (Asset::where('id', $id)->exists() && auth('sanctum')->user()->id === Asset::where('id', $id)->value('user_id')){
-
-            $asset = auth('sanctum')->user()->assets()->where('id', $id)->get();
-
-        return $asset; } else {
-
-            return ('Asset id '.'  '.$id.'  '.' not exist or  belongs to another user');
+    public function getSingleAssetData($id)
+    {
+        $asset = Asset::find($id);
+        if(!$asset){
+            throw new AssetNotFoundException('Asset '  . $id .  ' not found');
+        } elseif (auth('sanctum')->user()->id !== Asset::where('id', $id)->value('user_id')){
+            throw new NotOwnedAssetException('Asset '  . $id .  ' belongs to another user');
         }
+
+        return auth('sanctum')->user()->assets()->where('id', $id)->get();
+
     }
 
     public function updateAsset(Request $request, Asset $asset){
@@ -101,14 +103,16 @@ class AssetService
 
     public function apiAssetDelete($id){
 
-        if (Asset::where('id', $id)->exists() && auth('sanctum')->user()->id === Asset::where('id', $id)->value('user_id')) {
-            auth('sanctum')->user()->assets()->where('id', $id)->delete();
-            return response()->json('Asset id -'.'  '.$id.'  '.' was deleted');
-
-        } else {
-
-            return response()->json('Asset id '.'  '.$id.'  '.' not exist or  belongs to another user');
+        $asset = Asset::find($id);
+        if(!$asset){
+            throw new AssetNotFoundException('Asset '  . $id .  ' not found');
+        } elseif (auth('sanctum')->user()->id !== Asset::where('id', $id)->value('user_id')){
+            throw new NotOwnedAssetException('Asset '  . $id .  ' belongs to another user');
         }
+        auth('sanctum')->user()->assets()->where('id', $id)->delete();
+
+        return response()->json('Asset id -'.'  '.$id.'  '.' was deleted');
+
     }
 
 }

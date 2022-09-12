@@ -20,10 +20,10 @@ class AssetNotFoundException extends Exception
      * Render the exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function render($request)
+    public function render(Request  $request)
     {
-        return response('Asset id '.'  '.$id.'  '.' not exist');
+        return response();
     }
 }
