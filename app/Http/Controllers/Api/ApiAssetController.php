@@ -79,7 +79,7 @@ class ApiAssetController extends Controller
 
         } catch (AssetNotFoundException $exception) {
 
-            return response()->json(['data' => $exception->getMessage()]);
+            return response()->json(['data' => $exception->getMessage()], status: 404);
 
         } catch (NotOwnedAssetException $exception) {
 
